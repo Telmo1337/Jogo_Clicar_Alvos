@@ -8,6 +8,7 @@ class boot extends Phaser.Scene {
       this.load.image('alvo', 'assets/target.png');
       this.load.image('fundo', 'assets/bg.jpg');
       this.load.image('mira', 'assets/mira.png');
+      this.load.audio('tiro', 'assets/tiro.wav');
     }
   
     create() {
@@ -46,6 +47,9 @@ class boot extends Phaser.Scene {
       this.tempo = 30;
   
       this.add.image(400, 300, 'fundo');
+
+      this.somTiro = this.sound.add('tiro');
+
 
       this.mira = this.add.image(400, 300, 'mira').setScale(0.1).setDepth(1);
   
@@ -86,6 +90,7 @@ class boot extends Phaser.Scene {
   
       alvo.once('pointerdown', () => {
         alvo.destroy();
+        this.somTiro.play();
         this.pontuacao += 10;
         this.textoPontuacao.setText('Pontuação: ' + this.pontuacao);
         this.gerarAlvo();
